@@ -21,7 +21,7 @@
     <label for="title" class="form-label">Post Creator</label>
     <input type="text" value="{{$post['posted_by']}}" class="form-control" id="creator">
   </div>
-  <button type="submit" class="btn btn-primary">Update</button>
+  <a href="{{route('posts.index')}}" type="submit" class="btn btn-primary">UPDATE</a>
 </form>
   @endsection
   

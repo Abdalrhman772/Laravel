@@ -23,6 +23,6 @@
                 <option>Mohamed</option>
             </select>
         </div>
-        <button type="submit" class="btn btn-success">Submit</button>
+        <a href="{{route('posts.index')}}" type="submit" class="btn btn-success">Submit</a>
     </form>
 @endsection

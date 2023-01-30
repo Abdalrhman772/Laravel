@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 
 class PostController extends Controller
 {
-    
+
     public function index()
     {
         $allPosts = [
@@ -103,6 +103,6 @@ class PostController extends Controller
     //*store
     public function store()
     {
-        return 'submitted';
+        return view('posts.index');
     }
 }
