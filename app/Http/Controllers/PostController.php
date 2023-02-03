@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Post;
+use App\Models\User;
 use App\http\Requests\StorePostRequest;
 
 class PostController extends Controller
@@ -11,16 +12,17 @@ class PostController extends Controller
 
     public function index()
     {
-        $allPosts = Post::all();
+        $selectedPost = Post::all();
         return view('posts.index', [
-            'posts' => $allPosts,
+            'posts' => $selectedPost,
         ]);
     }
 
 
     public function create()
     {
-        return view('posts.create');
+        $users = User::get();
+        return view('posts.create', ['users' => $users]);
     }
 
     //*show
@@ -35,21 +37,27 @@ class PostController extends Controller
     //*edit
     public function edit($postId)
     {
-
-
-
-        $title = request()->title;
-        $description = request()->description;
-
-        Post::where('id', $postId)->update([
-            'title' => $title,
-            'description' => $description
-        ]);
+        $users = User::get();
         $selectedPost = Post::find($postId);
 
         return view('posts.edit', [
-            'post' => $selectedPost
+            'post' => $selectedPost,
+            'users' => $users
         ]);
+    }
+
+    //! note here
+    public function update($postId, Request $request)
+    {
+        $selectedPost = Post::find($postId);
+        if (!$selectedPost) {
+            return to_route(route: 'posts.index');
+        }
+        $selectedPost->title = $request->title;
+        $selectedPost->description = $request->description;
+        $selectedPost->user_id = $request->posted_by;
+        $selectedPost->save();
+        return to_route(route: 'posts.index');
     }
 
     //*store -- insert into db
@@ -57,11 +65,24 @@ class PostController extends Controller
     {
         $title = request()->title;
         $description = request()->description;
+        $userId = request()->post_creator;
 
         Post::create([
             'title' => $title,
-            'description' => $description
+            'description' => $description,
+            'user_id' => $userId
         ]);
+        return to_route('posts.index');
+    }
+
+    //*destroy 
+    public function destroy($postId)
+    {
+        $selectedPost = Post::find($postId);
+        if (!$selectedPost) {
+            return to_route('posts.index');
+        }
+        $selectedPost->forceDelete();
         return to_route('posts.index');
     }
 }

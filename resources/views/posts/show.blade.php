@@ -4,29 +4,38 @@
 
 @section('content')
 <style>
-    h5{
+  body{
+    background-color: rgb(4, 69, 122);
+  }
+    h5,p{
         font-weight: bold;
     }
+    .right{
+      color: rgb(20, 78, 187)
+    }
+    .header-bg{
+      font-weight: bold;
+      color: white;
+      background-color: rgb(0, 41, 117)
+    }
 </style>
-<div class="card my-5">
-    <div class="card-header">
+<div class="card border-dark my-5">
+    <div class="card-header header-bg fs-5">
       Post info
     </div>
     <div class="card-body">
-      <h5 class="card-title">Title: {{$post['title']}}</h5>
-      <h5 class="card-title">Description: </h5>
-      <p class="card-text">{{$post->description}}</p>
+      <h5 class="card-title">Title: <span class="right">{{$post['title']}}</span></h5>
+      <h5 class="card-title">Description: <span class="right">{{$post->description}}</span></h5>
     </div>
   </div>
-<div class="card">
-    <div class="card-header">
+<div class="card border-dark">
+    <div class="card-header header-bg fs-5">
       Post Creator info
     </div>
     <div class="card-body">
-      <h5 class="card-title ">Name: {{$post['posted_by']}}</h5>
-      <h5 class="card-title ">Title: {{$post['title']}}</h5>
-      <h5 class="card-title">Created at: {{$post['created_at']}}</h5>
-      <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+      <h5 class="card-title ">Name: <span class="right">{{$post->user['name']}}</span> </h5>
+      <h5 class="card-title ">Title: <span class="right">{{$post['title']}}</span></h5>
+      <h5 class="card-title">Created at: <span class="right">{{$post['created_at']}}</span></h5>
     </div>
   </div>
   @endsection
