@@ -3,28 +3,15 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Post;
+use App\http\Requests\StorePostRequest;
 
 class PostController extends Controller
 {
 
     public function index()
     {
-        $allPosts = [
-            [
-                'id' => 1,
-                'title' => 'laravel',
-                'description' => 'hello this is laravel post',
-                'posted_by' => 'Ahmed',
-                'created_at' => '2022-01-28 10:05:00',
-            ],
-            [
-                'id' => 2,
-                'title' => 'PHP',
-                'description' => 'hello this is PHP post',
-                'posted_by' => 'Ali',
-                'created_at' => '2022-01-30 10:05:00',
-            ],
-        ];
+        $allPosts = Post::all();
         return view('posts.index', [
             'posts' => $allPosts,
         ]);
@@ -39,30 +26,7 @@ class PostController extends Controller
     //*show
     public function show($postId)
     {
-        $allPosts = [
-            [
-                'id' => 1,
-                'title' => 'laravel',
-                'description' => 'hello this is laravel post',
-                'posted_by' => 'Ahmed',
-                'created_at' => '2022-01-28 10:05:00',
-            ],
-            [
-                'id' => 2,
-                'title' => 'PHP',
-                'description' => 'hello this is PHP post',
-                'posted_by' => 'Ali',
-                'created_at' => '2022-01-30 10:05:00',
-            ],
-        ];
-
-
-        $selectedPost = '';
-        foreach ($allPosts as $post) {
-            if ($post['id'] == $postId) {
-                $selectedPost = $post;
-            }
-        }
+        $selectedPost = Post::find($postId);
         return view('posts.show', [
             'post' => $selectedPost
         ]);
@@ -71,38 +35,33 @@ class PostController extends Controller
     //*edit
     public function edit($postId)
     {
-        $allPosts = [
-            [
-                'id' => 1,
-                'title' => 'laravel',
-                'description' => 'hello this is laravel post',
-                'posted_by' => 'Ahmed',
-                'created_at' => '2022-01-28 10:05:00',
-            ],
-            [
-                'id' => 2,
-                'title' => 'PHP',
-                'description' => 'hello this is PHP post',
-                'posted_by' => 'Ali',
-                'created_at' => '2022-01-30 10:05:00',
-            ],
-        ];
 
 
-        $selectedPost = '';
-        foreach ($allPosts as $post) {
-            if ($post['id'] == $postId) {
-                $selectedPost = $post;
-            }
-        }
+
+        $title = request()->title;
+        $description = request()->description;
+
+        Post::where('id', $postId)->update([
+            'title' => $title,
+            'description' => $description
+        ]);
+        $selectedPost = Post::find($postId);
+
         return view('posts.edit', [
             'post' => $selectedPost
         ]);
     }
 
-    //*store
+    //*store -- insert into db
     public function store()
     {
-        return view('posts.index');
+        $title = request()->title;
+        $description = request()->description;
+
+        Post::create([
+            'title' => $title,
+            'description' => $description
+        ]);
+        return to_route('posts.index');
     }
 }

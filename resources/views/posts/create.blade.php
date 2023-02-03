@@ -7,12 +7,13 @@
         @csrf
         <div class="mb-3">
             <label class="form-label">Title</label>
-            <input type="text" class="form-control" >
+            <input type="text" name="title" class="form-control" >
         </div>
         <div class="mb-3">
             <label  class="form-label">Description</label>
             <textarea
                 class="form-control"
+                name="description"
             ></textarea>
         </div>
         <div class="mb-3">
@@ -23,6 +24,6 @@
                 <option>Mohamed</option>
             </select>
         </div>
-        <a href="{{route('posts.index')}}" type="submit" class="btn btn-success">Submit</a>
+        <button type="submit" class="btn btn-success">Submit</لا>
     </form>
 @endsection

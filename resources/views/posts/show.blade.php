@@ -15,7 +15,7 @@
     <div class="card-body">
       <h5 class="card-title">Title: {{$post['title']}}</h5>
       <h5 class="card-title">Description: </h5>
-      <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+      <p class="card-text">{{$post->description}}</p>
     </div>
   </div>
 <div class="card">
