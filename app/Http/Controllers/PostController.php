@@ -46,7 +46,7 @@ class PostController extends Controller
         ]);
     }
 
-    //! note here
+
     public function update($postId, Request $request)
     {
         $selectedPost = Post::find($postId);
