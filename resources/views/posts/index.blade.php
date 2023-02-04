@@ -33,7 +33,7 @@
                     <td>{{$post->id}}</td>
                     <td>{{$post->title}}</td>
                     <td>{{$post->user['name'] ?? "not found"}}</td>
-                    <td>{{$post['created_at']}}</td>
+                    <td>{{$post['created_at']->format('Y-m-d')}}</td>
                     <td>
                         <form action="{{ route('posts.destroy',$post->id)}}"
                             method="POST">
@@ -50,6 +50,7 @@
         
             </tbody>
         </table>
+        {{ $posts->links('pagination::bootstrap-5') }}
     </div>
 </div>
 

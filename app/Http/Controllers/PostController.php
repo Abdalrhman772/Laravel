@@ -12,7 +12,7 @@ class PostController extends Controller
 
     public function index()
     {
-        $selectedPost = Post::all();
+        $selectedPost = Post::paginate(6);
         return view('posts.index', [
             'posts' => $selectedPost,
         ]);
@@ -55,7 +55,7 @@ class PostController extends Controller
         }
         $selectedPost->title = $request->title;
         $selectedPost->description = $request->description;
-        $selectedPost->user_id = $request->posted_by;
+        $selectedPost->user_id = $request->post_creator;
         $selectedPost->save();
         return to_route(route: 'posts.index');
     }

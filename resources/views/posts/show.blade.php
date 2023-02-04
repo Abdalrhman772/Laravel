@@ -35,7 +35,7 @@
     <div class="card-body">
       <h5 class="card-title ">Name: <span class="right">{{$post->user['name']}}</span> </h5>
       <h5 class="card-title ">Title: <span class="right">{{$post['title']}}</span></h5>
-      <h5 class="card-title">Created at: <span class="right">{{$post['created_at']}}</span></h5>
+      <h5 class="card-title">Created at: <span class="right">{{$post['created_at']->format('Y-m-d')}}</span></h5>
     </div>
   </div>
   @endsection
