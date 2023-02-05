@@ -11,31 +11,32 @@ class CommentController extends Controller
     public function store(Request $request)
     {
         // always make a request to validate
-        $request->validate([
-            'text' => ['required'],
-            'postId' => ['required', 'exists:posts,id'],
-        ]);
-
+        // $request->validate([
+        //     'text' => ['required'],
+        //     'postId' => ['required', 'exists:posts,id'],
+        // ]);
+        $data = request()->all(); //insted of using $_POST 
+        $comment = $data['text'];
+        $post_id = $data['post_id'];
         Comment::create([
-            'text' => $request->text,
-            'id' => $request->postId,
+            'text' => $comment,
+            'post_id' => $post_id,
             'user_id' => Auth::user()->id,
         ]);
-
-        return redirect()->route('posts.show', $request->postId);
+        return redirect()->route('posts.show', $post_id);
     }
 
     public function destroy($commentId)
     {
-        $selectedComment = Comment::find($commentId);
+        $UserComment = Comment::find($commentId);
 
-        if (!$selectedComment) {
+        if (!$UserComment) {
             return to_route(route: 'posts.index');
         }
 
-        $postId = $selectedComment->id;
-        $selectedComment->delete();
+        $post_id = $UserComment['post_id'];
+        $UserComment->delete();
 
-        return redirect()->route('posts.show', $postId);
+        return redirect()->route('posts.show', $post_id);
     }
 }

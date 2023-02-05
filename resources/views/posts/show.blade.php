@@ -77,7 +77,7 @@
                         </div>
 
                         <div class="d-flex justify-content-end gap-2 mt-2">
-                            <form method="POST" action="{{ route('comments.destroy', $comment->id) }}">
+                            <form method="POST" action="{{ route('comments.destroy', $comment->post_id) }}">
                                 @csrf
                                 @method('DELETE')
                                 <input type="submit" value="Delete" class="btn text-danger btn-sm" />

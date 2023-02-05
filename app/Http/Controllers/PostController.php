@@ -15,7 +15,7 @@ class PostController extends Controller
 
     public function index()
     {
-        $selectedPost = Post::paginate(6);
+        $selectedPost = Post::paginate(4);
         return view('posts.index', [
             'posts' => $selectedPost,
         ]);
@@ -31,7 +31,7 @@ class PostController extends Controller
     //*show
     public function show($postId)
     {
-        $comments = Comment::where('id', $postId)->get();
+        $comments = Comment::where('post_id', $postId)->get();
         $selectedPost = Post::find($postId);
         return view('posts.show', [
             'post' => $selectedPost,

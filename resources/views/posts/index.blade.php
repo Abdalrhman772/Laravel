@@ -22,7 +22,7 @@
                     <th scope="col">Title</th>
                     <th scope="col">Posted By</th>
                     <th scope="col">Created At</th>
-                    <th scope="col">Actions</th>
+                    <th scope="col" style="text-align:center">Actions</th>
                 </tr>
             </thead>
             <tbody>
@@ -34,7 +34,7 @@
                     <td>{{$post->title}}</td>
                     <td>{{$post->user['name'] ?? "not found"}}</td>
                     <td>{{$post['created_at']->format('Y-m-d')}}</td>
-                    <td>
+                    <td style="text-align:center">
                         <form action="{{ route('posts.destroy',$post->id)}}"
                             method="POST">
                             @csrf
