@@ -16,9 +16,12 @@
                 name="description"
             ></textarea>
         </div>
+        <div class="form-group mb-3">
+            <label for="post-image" class="form-label">Image</label>
+            <input class="form-control form-control-sm" name="image" id="post-image" type="file" />
+          </div>
         <div class="mb-3">
             <label class="form-check-label">Post Creator</label>
-
             <select name="post_creator" class="form-control">
                @foreach ($users as $user)
                    <option value="{{$user->id}}"> {{$user->name}} </option>

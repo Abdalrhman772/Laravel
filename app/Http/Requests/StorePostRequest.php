@@ -24,7 +24,17 @@ class StorePostRequest extends FormRequest
     public function rules()
     {
         return [
-            //
+            'title' => ['required', 'min:3'],
+            'description' => ['required', 'min:10'],
+            'image' => 'mimes:jpg,bmp,png'
+        ];
+    }
+    public function messages()
+    {
+        return [
+            'title.required' => 'Post must have a title!',
+            'description.required' => 'Post must have description!',
+            // 'author_id.exists' => 'Author id not found!'
         ];
     }
 }
