@@ -70,17 +70,17 @@
                     <div class="card-body">
                         <p>{{ $comment->text }}</p>
 
-                        <div class="d-flex justify-content-between small text-muted">
-                            <span class="text-success">- {{ $comment->user->name }}</span>
+                        <div class="small text-muted">
+                            <span class="d-block right fw-bold">by: {{ $comment->user->name }}</span>
 
-                            <span>{{ $comment->created_at->format('Y-m-d') }}</span>
+                            <span class="right fw-bold">on: {{ $comment->created_at->format('Y-m-d') }}</span>
                         </div>
 
-                        <div class="d-flex justify-content-end gap-2 mt-2">
+                        <div class="card mt-2">
                             <form method="POST" action="{{ route('comments.destroy', $comment->post_id) }}">
                                 @csrf
                                 @method('DELETE')
-                                <input type="submit" value="Delete" class="btn text-danger btn-sm" />
+                                <input type="submit" value="Delete" class="btn btn-danger btn-sm" />
                             </form>
                         </div>
                     </div>
